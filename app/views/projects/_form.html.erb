@@ -1,0 +1,25 @@
+
+<%= form_for @project, :html => { :class => "form_for"} do |f| %>
+
+<% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<%= f.label :name %>
+<%= f.text_field :name, required: true, class: 'input_form_for', class: 'input_form_for' %>
+<br>
+<%= f.label :goal %>
+<%= f.text_field :goal, required: true, class: 'input_form_for', type: 'number', min:'1' %>
+<br>
+<%= f.label :description%>
+<%= f.text_field :description , class: 'input_form_for', required: true%>
+<br>
+<%= f.submit class:'submit_form_for' %>
+<% end %>

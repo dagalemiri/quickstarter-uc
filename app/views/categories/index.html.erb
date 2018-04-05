@@ -1,0 +1,32 @@
+
+  <section>
+   <div class="user-header">
+    <h3>Create a new category</h3>
+  </div>
+    <%= form_for @category, :html => { :class => "form_for"}, url: {action: "create"} do |f| %>
+    <br>
+    <%= f.text_field :name, required: true, class: 'input_form_for' %>
+    <%= f.submit  class: 'submit_form_for' %>
+    <% end %>
+  </section>
+  <section>
+  <div class="user-header">
+    <h3>Create a new category</h3>
+  </div>
+    <div class="table">
+    <table class="user-table">
+      <tr class="user-table-row">
+        <th class="user-table-header">Category</th>
+        <th class="user-table-header">Edit</th>
+        <th class="user-table-header">Destroy</th>
+      </tr>
+        <% @categories.each do |x| %>
+        <tr class="user-table-row">
+          <td class="user-table-data">  <%= x.name  %></td>
+          <td class="user-table-data">  <%= link_to 'Edit', edit_category_path(x.id) %></td>
+          <td class="user-table-data">  <%= link_to 'Destroy', delete_cat_path(x.id), data: {confirm: 'are you sure?'} %></td>
+        </tr>
+        <% end %>
+      </table>
+    <div>
+</section>

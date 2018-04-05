@@ -1,0 +1,276 @@
+
+<p id="output"></p>
+
+<% @user = User.find(@project.user_id) %>
+
+<div class="project-header">
+    <h1> <%=@project.name%> </h1>
+
+    <select id="currency" onchange="GetCurrency()">
+
+      <option value="USD" selected>USD</option>
+
+
+      <% @currencies.each do |x| %>
+      <option value= <%= x %> > <%= x %></option>
+     <%end%>
+
+    </select>
+
+</div>
+<section class="project-profile">
+
+  <div class="project-image">
+    <%if @project.photo.blank? %>
+      <% if @project.categories.any? %>
+      <%= image_tag("/images/placeholder-"+@project.categories[0].name+".png", :size => "300x300") %>
+      <%else%>
+      <%= image_tag("/images/placeholder-project.png", :size => "300x300") %>
+
+      <% end%>
+    <% else %>
+      <%= image_tag @project.photo.url, :size => "300x300" %>
+    <% end %>
+  </div>
+
+  <div class="project-information">
+    <br />
+    <p> <b> Project name:</b> <%= @project.name %> </p>
+    <br />
+    <p> <b>Owner:</b> <%= link_to @user.first_name, @user %> </p>
+    <br />
+    <p> <b>Description: </b><%= @project.description %> </p>
+
+
+  </div>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <h1 class="modal-header">Please Login</h1>
+  <%= form_for :session,:html => { :class => "form_for"}, url: session_path do |f| %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email, class: 'input_form_for', required: true, :pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
+      <br>
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'input_form_for', required: true,minlength: 6 %>
+      <br>
+      <%= f.submit 'Login',  class: 'submit_form_for'%>
+
+<% end %>
+
+<h1 class="modal-header"> Or create an account <%= link_to "Here", '/users/new' %> </h1>
+
+  </div>
+
+</div>
+
+
+
+
+  <div class="project-action-box">
+
+    <%= form_for @investment, remote: true, html:{id:"investment_for"}, url: create_investment_path do |f| %>
+      <h2 class = "donate-header" > Donate! </h2>
+      <%= f.number_field :amount, min: '1', required: true, :class => "donate-field",max:'1000000',:placeholder =>"1,000,000"  %>
+      <%= f.hidden_field :currency, :value => 1, :class => "actual-currency" %>⁠⁠⁠⁠
+      <br>
+      <div class='submit-form'>
+        <%= f.submit "Donate", class: "submit_form_for_donate", id:"aux1" %>
+      </div>
+      <div class='donation-thanks'>
+        <p>Thanks for donating!</p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+
+<% if is_admin %>
+<div class="project-action" id="project-edit">
+   <%= link_to 'Edit project', edit_project_path(@project) %>
+</div>
+<div class="project-action-delete" id="project-delete">
+   <%= link_to 'Delete project',@project, method: :delete, data: { confirm: "Are you sure?" } %>
+</div>
+<% elsif  is_valid(@project.user_id) %>
+<div class="project-action" id="project-edit">
+  <%= link_to 'Edit Project', edit_project_path(@project) %>
+</div>
+<div class="project-action-delete" id="project-delete">
+  <%= link_to 'Delete Project',@project, method: :delete, data: { confirm: "Are you sure?" }%>
+</div>
+<% end %>
+
+
+<div id=countdown-wrap>
+
+  <div id="goal">$<%= number_with_delimiter(@project.goal, :delimiter => ',')%></div>
+  <div id="goal-usd", style="visibility: hidden"><%= number_with_delimiter(@project.goal, :delimiter => ',')%></div>
+
+  <div id="glass">
+    <div id="progress" style="width: <%=((@project.current.to_f/@project.goal.to_f).round(2)*100).to_i %>%;">
+    </div>
+  </div>
+  <div class="goal-stat">
+    <span class="goal-number" id='current-percent'><%=((@project.current.to_f/@project.goal.to_f).round(2)*100).to_i %>%</span>
+
+    <span class="goal-label">Funded</span>
+  </div>
+  <div class="goal-stat">
+    <span class="goal-number" id='current'>$<%= number_with_delimiter(@project.current, :delimiter => ',')%></span>
+    <span class="goal-number" id='current-usd', style="visibility: hidden"><%= number_with_delimiter(@project.current, :delimiter => ',')%></span>
+
+
+    <span class="goal-label">Raised</span>
+  </div>
+
+  <div class="goal-stat">
+    <span class="goal-number" id='current-sponsors'><%= Investment.where(:project_id =>@project.id).count%></span>
+    <span class="goal-label">Sponsors</span>
+  </div>
+</div>
+
+<% if is_valid(@project.user_id)%>
+<section>
+  <div class="project-header">
+    <h1> Investors in  <%= @project.name %>  </h1>
+  </div>
+
+    <% if @project.investments.count == 0 %>
+    <div class="project-header">
+        <p> There are no investors<p>
+    </div>
+    <% else %>
+    <div class="table">
+    <table class="project-table">
+      <tr class="project-table-row">
+        <th class="project-table-header">User</th>
+        <th class="project-table-header">Amount</th>
+        <% if is_admin %>
+          <th class="project-table-header">Edit</th>
+          <th class="project-table-header">Delete </th>
+        <% end %>
+      </tr>
+        <% @project.investments.each do |x| %>
+        <tr class="project-table-row">
+          <% @user =  User.find(x.user_id) %>
+          <td class="project-table-data">  <%= link_to @user.first_name+' '+@user.last_name, @user %> </td>
+          <td class="project-table-data">  <%= x.amount %> </td>
+          <% if is_admin %>
+            <td class="project-table-data"> <%= link_to 'Edit',edit_investment_path(x.id) %> </td>
+            <td class="project-table-data">  <%= link_to 'Delete', delete_investment_path(x.id) ,method: :delete , data: {confirm:"are you sure?"}  %> </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </table>
+    <% end %>
+    <div>
+</section>
+
+<% end%>
+
+<section id="section-comments">
+  <div class="project-header">
+  <h1>Comments </h1>
+ </div>
+<div class="comment-section">
+
+
+<%= form_for @comment,remote: true, html:{id:"comment_for"},url: create_comment_path do |f|  %>
+      <%= f.text_area :content, :class => "comment-field", required: true,placeholder: "Comment here" %>
+      <br>
+      <div class='submit-form'>
+      <!--<%= f.submit "Comment", class:['submit_form_for'], id:"aux"%>-->
+      </div>
+  <% end %>
+</div>
+
+  <% if @project.comments.count == 0 %>
+  <div class="project-header" id="no-comments">
+  </div>
+  <% else %>
+    <div class="comments-container">
+        <ul id="comments-list" class="comments-list">
+
+                <% @project.comments.each do |x| %>
+                <li>
+                  <%= render partial: 'comment', :object =>{:comment => x, :user_id => @project.user_id} %>
+                </li>
+
+                <% end %>
+        </ul>
+    </div>
+      <% end %>
+</section>
+
+<script>
+
+<% if !current_user%>
+
+    $("#comment_content").keyup(function(event){
+        if(event.keyCode == 13){
+            $input = $("#comment_content");
+
+            console.log($input.val());
+
+            var modal = document.getElementById("myModal");
+            //var btn = document.getElementById("aux");
+            var span = document.getElementsByClassName("close")[0];
+            modal.style.display = "block"
+            modal.style.zIndex = "1";
+
+            //btn.onclick = function() {
+              //modal.style.display = "block";
+            //}
+            span.onclick = function() {
+              modal.style.display = "none";
+
+            }
+
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                  modal.style.display = "none";
+              }
+            }
+
+        }
+    });
+
+  $input = $("#comment_content");
+  console.log($input.val());
+
+  var modal = document.getElementById("myModal");
+
+  //var btn = document.getElementById("aux");
+  var btn1 = document.getElementById("aux1");
+  var span = document.getElementsByClassName("close")[0];
+
+
+  //btn.onclick = function() {
+    //modal.style.display = "block";
+  //}
+
+
+  btn1.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+<%end%>
+
+</script>

@@ -1,0 +1,23 @@
+
+
+<section>
+  <div class="user-header">
+    <h3>Users </h3>
+  </div>
+    <div class="table">
+    <table class="user-table">
+      <tr class="user-table-row">
+        <th class="user-table-header">First name</th>
+        <th class="user-table-header">Last name</th>
+        <th class="user-table-header">Show</th>
+      </tr>
+        <% @users.each do |x| %>
+        <tr class="user-table-row">
+          <td class="user-table-data">  <%= x.first_name  %></td>
+          <td class="user-table-data">  <%= x.last_name  %></td>
+          <td class="user-table-data"> <%= link_to 'Show', x %> </td>
+        </tr>
+        <% end %>
+      </table>
+    <div>
+</section>

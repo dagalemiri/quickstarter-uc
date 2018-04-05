@@ -1,0 +1,67 @@
+<h1> Edit Project </h1>
+
+<div class="tab">
+  <button class="tablinks defaultOpen" id='edit-info-button' data-tab="edit-info">Personal info</button>
+  <button class="tablinks" id='edit-categories-button' data-tab="edit-categories">Categories</button>
+</div>
+
+
+<div class="edit-info tabcontent">
+<%= form_for @project, :html => { :class => "form_for", multipart: true } do |f| %>
+
+<% if @project.errors.any? %>
+    <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+    <ul>
+    <% @project.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>
+
+
+<%= f.label :name %>
+<%= f.text_field :name, required: true, class: 'input_form_for' %>
+<br>
+<%= f.label :description %>
+<%= f.text_area :description, class: 'input_form_for' %>
+<br>
+<%= f.label :limit_date %>
+<br>
+<%= f.date_field :limit_date%>
+<br>
+<%= f.label :goal %>
+<br>
+<%= f.text_field :goal, required: true, class: 'input_form_for', type: 'number', min:'1' %>
+<br>
+<%= f.file_field :photo %>
+<br>
+<%= f.submit  class: 'submit_form_for' %>
+<% end %>
+
+
+
+</div>
+
+
+<div class="edit-categories tabcontent">
+<table class='cat-table'>
+  <thead>
+    <tr>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= form_for @project, url: {action: "edit_categories", method:'patch'} do |f|%>
+   <% @categories.each do |category| %>
+    <tr>
+    <td> <%= category.name %> <%= check_box_tag "categories[]", category.name, is_checked_project?(category) %>  </td>
+    </tr>
+  <%end%>
+
+  </tbody>
+</table>
+<%= f.button 'Update', class:'submit_form_for', id:'cat-submit'%>
+<% end %>
+
+</div>

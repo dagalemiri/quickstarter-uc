@@ -1,0 +1,42 @@
+function GetCurrency()
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", 'http://apilayer.net/api/live?access_key=6bf5a672c5e0d6a3c28465bb5220d35f&currencies='+document.getElementById("currency").value+'&format=1', false );
+    xmlHttp.send( null );
+    obj = JSON.parse(xmlHttp.responseText);
+    quotes = obj.quotes;
+    value = quotes[Object.keys(quotes)[0]];
+
+
+    return value;
+}
+
+
+console.log('Hola');
+
+
+
+var current = $('#current').text().replace('$','').replace(',','').replace('.','');
+var amount = <%= @original_amount %>;
+var goal = +($('#goal').text().replace('$','').replace(',',''));
+var current_sponsors = $('#current-sponsors').text();
+var currency = $( "#currency" ).val();
+var current_value = GetCurrency(currency);
+
+var current_usd = +($('#current-usd').text().replace(',','').replace('.',''));
+var goal_usd = +($('#goal-usd').text().replace(',','').replace('.',''));
+
+var current_currency = current_usd * current_value;
+var goal_currency = goal_usd * current_value;
+var actual = +(current_currency)+(+(amount));
+
+$('#current').text('$'+actual.toLocaleString().replace('.',','));
+
+
+var percent = (+(actual)/+goal_currency)*100;
+$('#current-percent').text(parseInt(percent)+'%')
+$('#progress').css("width", parseInt(percent)+"%");
+$('#current-sponsors').text(+current_sponsors+1);
+$('.donate-field').val('');
+$('.donation-thanks').css('visibility','visible');
+$("#investment_amount").val("");

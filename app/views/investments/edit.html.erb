@@ -1,0 +1,7 @@
+<h1> Edit investment </h1>
+
+<%= render partial:'form',  object: @investment %>
+
+<%= link_to "Go to project", project_path(@investment.project_id)%>
+<br>
+<%= link_to "Go to user's profile", user_path(@investment.user_id)%>

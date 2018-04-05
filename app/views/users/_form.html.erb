@@ -1,0 +1,29 @@
+<%= form_for @user, :html => { :class => "form_for", multipart: true } do |f| %>
+
+<% if @user.errors.any? %>
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<%= f.label :first_name %>
+<%= f.text_field :first_name, required: true, class: 'input_form_for' %>
+<br>
+<%= f.label :last_name %>
+<%= f.text_field :last_name, required: true, class: 'input_form_for' %>
+<br>
+<%= f.label :email %>
+<%= f.text_field :email, required: true, class: 'input_form_for', type: 'email',:pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
+<br>
+<%= f.label :password%>
+<%= f.password_field :password, required: true, class: 'input_form_for', minlength: 6 %>
+<br>
+<%= f.label :password_confirmation%>
+<%= f.password_field :password_confirmation, required: true, class: 'input_form_for', minlength: 6  %>
+<br>
+<%= f.submit  class: 'submit_form_for' %>
+<% end %>

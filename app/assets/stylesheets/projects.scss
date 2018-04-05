@@ -1,0 +1,439 @@
+// Place all the styles related to the projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+#currency{
+  float: right;
+  margin-top: 10px;
+  margin-right: 50px;
+  height: 40px;
+  width: 120px;
+}
+.edit-categories{
+  text-align: center;
+
+}
+.cat-table{
+  margin-left: auto;
+  margin-right: auto;
+  td{
+    text-align: left;
+  }
+}
+#cat-submit{
+  width: 200px;
+}
+
+.submit_form_for{
+	border-radius: 15px 15px 15px 15px;
+
+}
+
+body * {
+	font-family: 'Nunito', sans-serif;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #142F4C;
+}
+
+#countdown-wrap {
+  height: 30px;
+	width: 100%;
+  padding: 5px;
+  font-family: arial;
+  max-width: 650px;
+  margin: 30px auto 150px;
+	position: relative;
+}
+
+#goal {
+  font-size: 48px;
+  text-align: right;
+  color: black;
+  @media only screen and (max-width : 640px) {
+    text-align: center;
+  }
+
+}
+
+#glass {
+  width: 100%;
+  height: 20px;
+  background: #c7c7c7;
+  border-radius: 10px;
+  float: left;
+  overflow: hidden;
+}
+
+#progress {
+  float: left;
+  height: 20px;
+  background: #FF5D50;
+  z-index: 333;
+  //border-radius: 5px;
+}
+
+.goal-stat {
+  width: 25%;
+  //height: 30px;
+  padding: 10px;
+  float: left;
+  margin: 0;
+  color: black;
+
+  @media only screen and (max-width : 640px) {
+    width: 50%;
+    text-align: center;
+  }
+}
+
+.goal-number, .goal-label {
+  display: block;
+}
+
+.goal-number {
+  font-weight: bold;
+}
+
+.project-header {
+  display: inline;
+  text-align: center;
+	padding: 30px;
+}
+
+.project-profile {
+  padding: 10px;
+  margin-top: 45px;
+  padding-right: 40px;
+  position:relative;
+
+
+  .project-image{
+      display: inline-block;
+      border-radius: 15px 15px 15px 15px
+  }
+  .project-information{
+      display: inline-block;
+      margin-left: 1%;
+      width: 20%;
+      vertical-align: top;
+
+  }
+  .project-action-box{
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+
+
+
+  }
+}
+
+.projects-index{
+  padding: 10px;
+}
+
+.project-square{
+  background: white;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 8px;
+  display: inline-block;
+  height: 350px;
+  margin: 1rem;
+  position: relative;
+  width: 250px;
+  overflow: scroll;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2),0 5px 13px 0 rgba(0,0,0,0.19) !important;
+}
+
+
+.project-square:hover {
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2),0 5px 13px 0 rgba(0,0,0,0.19) !important;
+}
+
+.project-square img{
+  width: 250px;
+  height: 250px;
+}
+#project-name{
+}
+#project-owner{
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+#project-goal{
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+#new-project{
+  color: inherit;
+  position: absolute;
+  right: 0px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  font: normal 30px/1 Impact, Charcoal, sans-serif;
+
+}
+
+.comment-field{
+  // width:680px;
+  // height: 70px;
+  // border-radius: 4px;
+  // border-color: #D3D3D3;
+  // padding: 10px 8px 10px 8px;
+  // position:relative;
+
+    width: 680px;
+    height: 70px;
+    border-radius: 4px;
+    border-color: #D3D3D3;
+    padding: 10px 8px 10px 8px;
+    position: relative;
+    margin-left: 25%;
+    margin-right: 20%;
+    /* width: 50%; */
+    text-align: left;
+    margin-bottom:9px;
+  //margin-left:21%;
+  //float:right;
+
+
+  // margin-left:10%;
+  // margin-left:10%;
+}
+.donate-field{
+  margin-left:25%;
+  margin-right:25%;
+  width:50%;  height: 30px;
+  border-radius: 10px;
+  padding: 10px 8px 10px 8px;
+}
+
+
+
+.donate-header{
+  text-align: center;
+}
+
+.donation-thanks{
+  text-align: center;
+  visibility: hidden;
+}
+
+
+.submit-form{
+  margin-left:25%;
+  margin-right:25%;
+  width:50%;
+  text-align: center;
+}
+
+.project-action{
+    display: inline-block;
+    border: none;
+    color: #FFF;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: green;
+}
+
+.project-action-delete{
+    display: inline-block;
+    border: none;
+    color: #FFF;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: red;
+}
+.project-action a{
+  text-decoration: none;
+}
+
+
+#project-edit a{
+  color:white;
+}
+#project-edit{
+  margin-left: 25px;
+}
+#project-delete a{
+  color:white;
+
+}
+#project-delete{
+}
+#project-comment a{
+  color:blue;
+}
+#project-comment{
+  border-color: blue;
+}
+
+.table{
+	.center{
+		margin-left:auto;
+    margin-right:auto;
+	}
+
+}
+table.project-table {
+	width:65%;
+	margin-left:20%;
+	margin-right:15%;
+
+}
+
+th.project-table-header, td.project-table-data {
+    text-align: left;
+    padding: 8px;
+}
+
+tr.project-table-row:nth-child(even){
+  background-color: #f2f2f2
+}
+
+th.project-table-header {
+    background-color: #03658c;
+    color: white;
+}
+
+#project-current{
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.digg_pagination {
+  cursor: default;
+  position: relative;
+  left: 35%;
+  }
+  .digg_pagination a, .digg_pagination span, .digg_pagination em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+  .digg_pagination .disabled {
+    color: #999999;
+    border: 1px solid #dddddd; }
+  .digg_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #2e6ab1; }
+  .digg_pagination a {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5; }
+    .digg_pagination a:hover, .digg_pagination a:focus {
+      color: #000033;
+      border-color: #000033; }
+  .digg_pagination .page_info {
+    background: #2e6ab1;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center; }
+    .digg_pagination .page_info b {
+      color: #000033;
+      background: #6aa6ed;
+      padding: 0.1em 0.25em; }
+  .digg_pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .digg_pagination {
+    height: 1%; }
+  *:first-child + html .digg_pagination {
+    overflow: hidden; }
+
+.modal-header {
+  text-align: center;
+  padding: 30px;
+}
+
+.project-header {
+  text-align: center;
+  padding: 30px;
+}
+
+.comment-section{
+
+
+}
+
+.comment-user{
+    width: 65px;
+    height: 65px;
+    position: relative;
+    z-index: 99;
+    float: left;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+}

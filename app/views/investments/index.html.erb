@@ -1,0 +1,24 @@
+<h1> Investments </h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Project</th>
+    <th>Amount</th>
+    <th>Delete</th>
+  </tr>
+  <% @investments.each do |x| %>
+  <tr>
+    <% if x.user_id != nil %>
+      <% user = User.find(x.user_id) %>
+    <td>  <%= user.first_name+" "+ user.last_name%> </td>
+    <% else %>
+    <td> Unknown_user </td>
+    <% end %>
+    <td>  <%= Project.find(x.project_id).name %> </td>
+    <td>  <%= x.amount %> </td>
+    <td>  <%= link_to 'Delete investment', delete_investment_path(x.id) ,method: :delete , data: {confirm:"are you sure?"} %> </td>
+    <% end %>
+  </tr>
+</table>
+

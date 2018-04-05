@@ -1,0 +1,7 @@
+
+
+$('.projects-index').empty();
+$('.projects-index').append("<%= escape_javascript(render partial:'projects/project', :object =>{ :projects => @projects})%>");
+
+$('.digg_pagination').empty();
+$('.digg_pagination').append("<%= escape_javascript(paginate @projects)%>");

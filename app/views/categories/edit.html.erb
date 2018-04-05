@@ -1,0 +1,14 @@
+  <section>
+   <div class="user-header">
+    <h3>Edit <%= @category.name %></h3>
+  </div>
+    <%= form_for @category, :html => { :class => "form_for"}, url: {action: "update"} do |f| %>
+    <%= f.label "Name"%>
+    <%= f.text_field :name, required: true, class: 'input_form_for' %>
+    <br>
+     <%= f.label "Description"%>
+    <%= f.text_area :description, required: true,class: 'input_form_for' %>
+    <%= f.submit  class: 'submit_form_for' %>
+    <% end %>
+<%= link_to 'Back', '/categories'%>
+  </section>

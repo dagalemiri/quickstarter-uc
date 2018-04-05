@@ -1,0 +1,11 @@
+
+<%= form_for @investment, url: update_investment_path, :html => { :class => "form_for"} do |x| %>
+    <h2 class = "donate-header" > "Project" <%= Project.find_by(id:@investment.project_id).name %> </h2>
+    <br>
+    <%= x.number_field :amount, min: '1', required: true, :class => "donate-field"  %>
+    <br>
+    <div class='submit-form'>
+    <%= x.submit "Donate", class: "submit_form_for"%>
+    </div>
+<% end %>
+

@@ -1,0 +1,17 @@
+<% project[:projects].each do |project| %>
+<a href="/projects/<%=project.id%>" class="project-square">
+  <%if project.photo.blank? %>
+    <% if project.categories.any? %>
+    <%= image_tag("/images/placeholder-"+project.categories[0].name+".png", :size => "300x300") %>
+    <%else%>
+    <%= image_tag("/images/placeholder-project.png", :size => "300x300") %>
+    <% end%>
+  <% else %>
+    <img src="<%= project.photo.url %>" >
+  <% end %>
+<h3 id="project-name"> <%= project.name %></h3>
+<p id="project-owner">Owner: <%= User.find(project.user_id).first_name %></p>
+<p id="project-goal">Goal: $<%= number_with_delimiter(project.goal, :delimiter => ',') %></p>
+<p id="project-current">Current: $<%= number_with_delimiter(project.current, :delimiter => ',') %></p>
+</a>
+<% end %>

@@ -1,0 +1,186 @@
+<% if is_valid(@user.id) %>
+  <div class="tab">
+    <button class="tablinks defaultOpen" data-tab="profile">Profile</button>
+    <button class="tablinks" data-tab="investments">Investments</button>
+    <button class="tablinks" data-tab="comments">Comments</button>
+  </div>
+
+
+ <div class="user-activity">
+
+  <div class="profile">
+    <div class="profile tabcontent">
+
+    <div class="user-header">
+      <h1> <%=@user.first_name%>'s profile </h1>
+    </div>
+
+  <section id="profile">
+    <div class="disp">
+      <div class="profile-image">
+        <%if @user.photo.blank? %>
+          <%= image_tag("/images/placeholder-user.png", :size => "300x300", :class=>'user-image') %>
+        <% else %>
+          <%= image_tag @user.photo.url, :size => "300x300" %>
+        <% end %>
+      </div>
+      <div>
+      <% if is_valid(@user.id) %>
+
+      <div class="user-action-edit" id="user-edit">
+        <h4> <%= link_to 'Edit information', edit_user_path(@user.id) %> </h4>
+      </div>
+      <div class="user-action-delete" id="user-delete">
+
+        <h4> <%= link_to 'Delete user',@user, method: :delete, data: { confirm: "Are you sure?" } %> </h4>
+      </div>
+    <% end %>
+    </div>
+    </div>
+
+    <div class="profile-information">
+      <p> First name: <%= @user.first_name %> </p>
+      <p> Last name: <%= @user.last_name %> </p>
+      <p> Email: <%= @user.email %> </p>
+      <p> Sex: <%= @user.sex %> </p>
+      <p> Birth date: <%= @user.birth_date %> </p>
+      <p> Description: <%= @user.description %> </p>
+      <% if is_valid(@user.id) %>
+        <p id='token'> Api token: <%= @user.token %> </p>
+      <% end %>
+    </div>
+
+</section>
+
+    </div>
+  </div>
+</div>
+
+
+ <div class="user-activity">
+  <div class="investments">
+
+    <div class="investments tabcontent">
+
+    <% if is_valid(@user.id) %>
+
+<section>
+  <div class="user-header">
+    <h3>Investments made by <%= @user.first_name %>  </h3>
+  </div>
+
+    <% if @user.investments.count == 0 %>
+    <div class="user-header">
+        <p> There are no investments<p>
+    </div>
+    <% else %>
+    <div class="table">
+    <table class="user-table">
+      <tr class="user-table-row">
+        <th class="user-table-header">Project</th>
+        <th class="user-table-header">Amount</th>
+        <% if is_valid(@user.id) %>
+        <th class="user-table-header">Edit</th>
+        <th class="user-table-header">Delete</th>
+        <% end %>
+      </tr>
+        <% @user.investments.each do |x| %>
+        <tr class="user-table-row">
+          <td class="user-table-data">  <%= link_to Project.find(x.project_id).name, Project.find(x.project_id) %> </td>
+          <td class="user-table-data">  <%= x.amount %> </td>
+          <% if is_valid(@user.id) %>
+            <td class="user-table-data"> <%= link_to 'Edit',edit_investment_path(x.id) %> </td>
+            <td class="user-table-data"> <%= link_to 'Delete',delete_investment_path(x.id), method: :delete, data: { confirm: "Are you sure?" } %> </td>
+          <% end %>
+        </tr>
+        <% end %>
+      </table>
+    <% end %>
+    <div>
+</section>
+<%end%>
+    </div>
+  </div>
+  </div>
+
+  <div class="user-activity">
+
+  <div class="comments">
+    <div class="comments tabcontent">
+
+
+<section>
+  <div class="user-header">
+
+  <h1>Comments </h1>
+ </div>
+  <% if @user.comments.count == 0 %>
+  <div class="user-header">
+      <p> There are no comments<p>
+  </div>
+  <% else %>
+    <div class="comments-container">
+        <ul id="comments-list" class="comments-list">
+
+                <% @user.comments.each do |x| %>
+                <li>
+                  <%= render partial: '/projects/comment', :object =>{:comment => x, :user_id => @user.id} %>
+                </li>
+
+                <% end %>
+        </ul>
+    </div>
+      <% end %>
+</section>
+
+
+    </div>
+  </div>
+  </div>
+<%else%>
+
+ <div class="user-header">
+     <h1> <%=@user.first_name%>'s profile </h1>
+    </div>
+
+  <section id="profile">
+    <div class="disp">
+      <div class="profile-image">
+        <%if @user.photo.blank? %>
+          <%= image_tag("/images/placeholder-user.png", :size => "300x300", :class=>'user-image') %>
+        <% else %>
+          <%= image_tag @user.photo.url, :size => "300x300" %>
+        <% end %>
+      </div>
+      <div>
+      <% if is_valid(@user.id) %>
+
+      <div class="user-action-edit" id="user-edit">
+        <h4> <%= link_to 'Edit information', edit_user_path(@user.id) %> </h4>
+      </div>
+      <div class="user-action-delete" id="user-delete">
+
+        <h4> <%= link_to 'Delete user',@user, method: :delete, data: { confirm: "Are you sure?" } %> </h4>
+      </div>
+    <% end %>
+    </div>
+    </div>
+
+    <div class="profile-information">
+      <p> First name: <%= @user.first_name %> </p>
+      <p> Last name: <%= @user.last_name %> </p>
+      <p> Email: <%= @user.email %> </p>
+      <p> Sex: <%= @user.sex %> </p>
+      <p> Birth date: <%= @user.birth_date %> </p>
+      <p> Description: <%= @user.description %> </p>
+      <% if is_valid(@user.id) %>
+        <p id='token'> Api token: <%= @user.token %> </p>
+      <% end %>
+    </div>
+
+</section>
+
+
+
+
+<%end%>

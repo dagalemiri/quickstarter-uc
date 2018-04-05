@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> Dear <%=@owner.first_name%>:</h1>
+    <p> We have registered a new donation for <%=@project.name%> from <%=User.find(@investment.user_id).first_name%>  who donated $<%=@investment.amount%>
+    <p>  Your project now have reached $<%=@project.current%>.</p>
+    <p>   Keep doing! </p>
+    <p>Kind regards</p>
+    <p>Quickstarter UC team.</p>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grupo9</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+  </head>
+
+  <body>
+    <header>
+        <ul id="navbar">
+        <li class="<%= active_class('/') %>" id="logo" ><a href="/"><span class="quick">Quick<span class="starter">Starter</span> </span></a> </li>
+        <li class="<%= active_class('/projects') %>" id='project-nav'> <span style='cursor: pointer;'onclick="openNav()"><a> Explore </a></span></li>
+        <li class="<%= active_class('/projects') %>" id='project-nav'> <%= link_to "Projects", projects_path %></li>
+
+        <% if is_admin %>
+          <li class="<%= active_class("/users") %>" id='users'> <%= link_to "Users", "/users"%></li>
+          <li class="<%= active_class("/categories") %>" id='categories'> <%= link_to "Categories", "/categories"%></li>
+        <% elsif current_user %>
+          <li class="<%= active_class(projects_new_path) %>" id='project-new'> <%= link_to "New Project", projects_new_path %></li>
+          <li class="<%= active_class(user_projects_path(current_user.id)) %>" id='my-projects' style="position: absolute;margin-left:825px;"> <%= link_to "My Projects", user_projects_path(current_user.id) %></li>
+        <% end %>
+         <li>
+          <%= form_tag '/projects/search', :method => 'get' do %>
+           <p>
+               <%= text_field_tag :search, nil,placeholder:'Find projects',class: 'input_search_for'%>
+               <%= submit_tag "Search" , class:'search_go'%>
+           <p>
+          <% end %>
+        </li>
+        </ul>
+
+
+        <div id="user-bar">
+          <% if current_user %>
+            <span>Welcome, <%= link_to current_user.first_name, current_user, class:'user-name'%></span>
+            <a class="log-out"><%= link_to 'Logout', session_path, method: :delete %></a>
+          <% else %>
+            <%= link_to 'Login', new_session_path %> or
+            <%= link_to 'Sign Up', users_new_path	 %>
+          <% end %>
+        </div>
+    </header>
+
+    <main>
+        <% [:alert, :notice].each do |flash_type| %>
+          <% if (flash_message = flash[flash_type]).present? %>
+              <div class="<%= flash_type %>"><%= flash_message %></div>
+          <% end %>
+
+        <% end %>
+
+        <div id="mySidenav" class="sidenav">
+          <ul>
+            <li><div class='sidenav-tittle'>Categories</div></li>
+
+
+            <% Category.all.pluck(:name).each do |x| %>
+              <li><a href="/projects/categories/<%= x %>"><%= x %></a></li>
+
+
+            <% end %>
+
+          </ul>
+          <a><span style="font-size:30px;cursor:pointer" onclick="closeNav()">&#x274c; close</span></a>
+
+        </div>
+
+        <%= yield %>
+    </main>
+
+  </body>
+  <footer>
+    <hr>
+    <div id="project">© QuickStarter 2017</div>
+    <div id="license">
+      <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/>
+      </a>
+    </div>
+  </footer>
+
+</html>

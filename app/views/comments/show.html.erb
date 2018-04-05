@@ -1,0 +1,17 @@
+<% @user = User.find(@comment.user_id) %>
+<% @project = Project.find(@comment.project_id) %>
+
+<h3> Comment </h3>
+<p> Content: <%= @comment.content %> </p>
+<p> Project: <%=link_to @project.name , @project %></p>
+<p> Owner: <%=link_to @user.first_name+' '+@user.last_name , @user%></p>
+<p> Limit date: <%= @project.limit_date %> </p>
+
+
+
+<h4> <%= link_to 'Edit comment', edit_comment_path(@comment) %> </h4>
+<h4> <%= link_to 'Delete comment', @comment, method: :delete,  remote: true, data: { type: 'json', 'user-id': user.id, confirm: 'Are you suree?'}%> </h4>
+
+
+
+<%= link_to 'Back', comments_path %>

@@ -1,0 +1,84 @@
+
+<h1 id='edit-user-header'> Edit User </h1>
+
+<div class='edit-user'>
+
+  <div class="tab">
+    <button class="tablinks defaultOpen" id='edit-info-button' data-tab="edit-info">Personal info</button>
+    <button class="tablinks" id='edit-categories-button' data-tab="edit-categories">Categories</button>
+  </div>
+
+
+  <div class="edit-info tabcontent">
+    <%= form_for @user, :html => { :class => "form_for", multipart: true } do |f| %>
+
+    <% if @user.errors.any? %>
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+    <% end %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name, required: true, class: 'input_form_for' %>
+  <br>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name, required: true, class: 'input_form_for' %>
+  <br>
+  <%= f.label :email %>
+  <%= f.text_field :email, required: true, class: 'input_form_for', type: 'email',:pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}' %>
+  <br>
+  <%= f.label :description %>
+  <%= f.text_area :description, class: 'input_form_for' %>
+  <br>
+  <%= f.label :sex %>
+  <br>
+  <%= f.select(:sex,[['Male', 'M'], ['Female', 'F']]) %>
+  <br>
+  <%= f.label :birth_date %>
+  <br>
+  <%= f.date_field :birth_date%>
+  <br>
+  <%= f.label :password%>
+  <%= f.password_field :password, required: true, class: 'input_form_for', minlength: 6 %>
+  <br>
+  <%= f.label :password_confirmation%>
+  <%= f.password_field :password_confirmation, required: true, class: 'input_form_for', minlength: 6  %>
+  <br>
+  <%= f.label 'Photo:'%>
+  <br>
+  <%= f.file_field :photo %>
+  <br>
+  <%= f.submit  class: 'submit_form_for' %>
+  <% end %>
+
+  </div>
+
+
+  <div class="edit-categories tabcontent">
+
+
+    <table class='cat-table'>
+      <thead>
+        <tr>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+      <%= form_for @user, url: {action: "edit_categories", method:'patch'} do |f|%>
+       <% @categories.each do |category| %>
+        <tr>
+        <td> <%= category.name %> </td>
+          <td><%= check_box_tag "categories[]", category.name, is_checked?(category)%>  </td>
+        </tr>
+      <%end%>
+
+      </tbody>
+    </table>
+    <%= f.button 'Update', class:'submit_form_for', id:'cat-submit'%>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<% @user = User.find(comment[:comment].user_id) %>
+<div class="comment-main-level">
+  <% if @user.photo.blank?%>
+  <div class="comment-avatar"><img src="/images/placeholder-user.png" alt=""></div>
+  <%else%>
+  <div class="comment-avatar"><img src=<%= @user.photo.url %> alt=""></div>
+
+  <%end%>
+	<div class="comment-box">
+		<div class="comment-head">
+			<h6 class="comment-name by-author"><a href="/users/<%= @user.id%>"><%= @user.first_name%>
+         <%=@user.last_name %> </a></h6>
+			<span><%= comment[:comment].created_at%></span>
+      <%if is_valid(comment[:user_id]) || is_valid(@user.id)%>
+
+      <span style="margin-left:5px"><%= link_to 'Edit', edit_comment_path(comment[:comment]) %> </span>
+      <span style="margin-left:5px"><%= link_to 'Delete', delete_comment_path(comment[:comment]) ,method: :delete ,  remote: true, data: { type: 'json', comment_id:1}  %> </span>
+      <%end%>
+		</div>
+		<div class="comment-content" data-comment-id=<%=comment[:comment].id%> ><%= comment[:comment].content %>
+
+</div>
+	</div>
+</div>

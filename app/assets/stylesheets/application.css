@@ -1,0 +1,317 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+
+ #home-title{
+   margin-top: 10px;
+   text-align:center
+
+ }
+
+ img{
+   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2),0 5px 13px 0 rgba(0,0,0,0.19) !important;
+   background: white;
+ }
+
+ #Navbar {
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   overflow: scroll;
+   border: 1px solid #e7e7e7;
+   background-color: #f3f3f3;
+ }
+ ::-webkit-scrollbar {
+    display: none;
+}
+
+ .NavbarElement {
+   float: left;
+ }
+
+ .NavbarElement a {
+     display: block;
+     color: black;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+ }
+ .NavbarElement a:hover {
+     background-color: #808080;
+ }
+
+
+ .form_for {
+   margin-left:auto;
+   margin-right:auto;
+   width:50%;
+ }
+
+ .input_form_for {
+     width: 100%;
+     padding: 12px 20px;
+     margin: 8px 0;
+     box-sizing: border-box;
+     border: 2px solid grey;
+     border-radius: 4px;
+ }
+
+ .submit_form_for {
+   width: 100%;
+     background-color: grey;
+     border: none;
+     color: black;
+     padding: 16px 32px;
+     text-decoration: none;
+     margin: 4px 2px;
+     cursor: pointer;
+ }
+
+ .submit_form_for_comment {
+   width: 100%;
+     background-color: #CBE32D;
+     border: none;
+     color: #FFF;
+     padding: 16px 32px;
+     text-decoration: none;
+     margin: 4px 2px;
+     cursor: pointer;
+     border-radius: 8px;
+     font-size: 20px;
+     padding: 10px;
+ }
+
+ .submit_form_for_donate {
+   width: 100%;
+     background-color: #0087e2;
+     border: none;
+     color: #FFF;
+     padding: 16px 32px;
+     text-decoration: none;
+     margin: 4px 2px;
+     cursor: pointer;
+     border-radius: 8px;
+     font-size: 20px;
+     padding: 10px;
+ }
+
+
+
+
+
+ /**
+  * Oscuro: #283035
+  * Azul: #03658c
+  * Detalle: #c7cacb
+  * Fondo: #dee1e3
+  ----------------------------------*/
+  * {
+  	margin: 0;
+  	padding: 0;
+  	-webkit-box-sizing: border-box;
+  	-moz-box-sizing: border-box;
+  	box-sizing: border-box;
+  }
+
+  a {
+  	color: #03658c;
+  	text-decoration: none;
+  }
+
+ ul {
+ 	list-style-type: none;
+ }
+
+ body {
+ 	font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
+ 	background: floralwhite;
+ }
+
+ /** ====================
+  * Lista de Comentarios
+  =======================*/
+ .comments-container {
+ 	width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+ }
+
+ .comments-container h1 {
+ 	font-size: 36px;
+ 	color: #283035;
+ 	font-weight: 400;
+ }
+
+ .comments-container h1 a {
+ 	font-size: 18px;
+ 	font-weight: 700;
+ }
+
+ .comments-list {
+ 	position: relative;
+ }
+
+ .comments-list:before {
+ 	content: '';
+ 	width: 2px;
+ 	height: 100%;
+ 	background: #c7cacb;
+ 	position: absolute;
+ 	left: 32px;
+ 	top: 0;
+ }
+
+ .comments-list:after {
+ 	content: '';
+ 	position: absolute;
+ 	background: #c7cacb;
+ 	bottom: 0;
+ 	left: 27px;
+ 	width: 7px;
+ 	height: 7px;
+ 	border: 3px solid #dee1e3;
+ 	-webkit-border-radius: 50%;
+ 	-moz-border-radius: 50%;
+ 	border-radius: 50%;
+ }
+
+ .comments-list li {
+ 	margin-bottom: 15px;
+ 	display: block;
+ 	position: relative;
+ }
+
+ .comments-list li:after {
+ 	content: '';
+ 	display: block;
+ 	clear: both;
+ 	height: 0;
+ 	width: 0;
+ }
+
+ .comments-list .comment-avatar {
+ 	width: 65px;
+ 	height: 65px;
+ 	position: relative;
+ 	z-index: 0;
+ 	float: left;
+ 	-webkit-border-radius: 4px;
+ 	-moz-border-radius: 4px;
+ 	border-radius: 4px;
+ 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+ 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+ 	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+ 	overflow: hidden;
+ }
+
+ .comments-list .comment-avatar img {
+ 	width: 100%;
+ 	height: 100%;
+ }
+ .comments-list .comment-box {
+ 	width: 680px;
+ 	float: right;
+ 	position: relative;
+ 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+ 	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+ 	box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+ }
+
+ .comments-list .comment-box:before, .comments-list .comment-box:after {
+ 	content: '';
+ 	height: 0;
+ 	width: 0;
+ 	position: absolute;
+ 	display: block;
+ 	border-width: 10px 12px 10px 0;
+ 	border-style: solid;
+ 	border-color: transparent #FCFCFC;
+ 	top: 8px;
+ 	left: -11px;
+ }
+
+
+ .comment-box .comment-head {
+ 	background: #FCFCFC;
+ 	padding: 10px 12px;
+ 	border-bottom: 1px solid #E5E5E5;
+ 	overflow: hidden;
+ 	-webkit-border-radius: 4px 4px 0 0;
+ 	-moz-border-radius: 4px 4px 0 0;
+ 	border-radius: 4px 4px 0 0;
+ }
+
+ .comment-box .comment-head i {
+ 	float: right;
+ 	margin-left: 14px;
+ 	position: relative;
+ 	top: 2px;
+ 	color: #A6A6A6;
+ 	cursor: pointer;
+ 	-webkit-transition: color 0.3s ease;
+ 	-o-transition: color 0.3s ease;
+ 	transition: color 0.3s ease;
+ }
+
+ .comment-box .comment-head i:hover {
+ 	color: #03658c;
+ }
+
+ .comment-box .comment-name {
+ 	color: #283035;
+ 	font-size: 14px;
+ 	font-weight: 700;
+ 	float: left;
+ 	margin-right: 10px;
+ }
+
+ .comment-box .comment-name a {
+ 	color: #283035;
+ }
+
+ .comment-box .comment-head span {
+ 	float: left;
+ 	color: #999;
+ 	font-size: 13px;
+ 	position: relative;
+ 	top: 1px;
+ }
+
+ .comment-box .comment-content {
+ 	background: #FFF;
+ 	padding: 12px;
+ 	font-size: 15px;
+ 	color: #595959;
+ 	-webkit-border-radius: 0 0 4px 4px;
+ 	-moz-border-radius: 0 0 4px 4px;
+ 	border-radius: 0 0 4px 4px;
+ }
+
+ .comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
+ .comment-box .comment-name.by-author:after {
+ 	content: 'author';
+ 	background: #03658c;
+ 	color: #FFF;
+ 	font-size: 12px;
+ 	padding: 3px 5px;
+ 	font-weight: 700;
+ 	margin-left: 10px;
+ 	-webkit-border-radius: 3px;
+ 	-moz-border-radius: 3px;
+ 	border-radius: 3px;
+ }

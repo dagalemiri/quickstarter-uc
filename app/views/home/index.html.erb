@@ -1,0 +1,13 @@
+<% if current_user && @projects %>
+<h1 id='home-title'> Projects you may like </h1>
+<div class="projects-index">
+  <%= render :partial =>'projects/project',
+    :object =>{:projects => @projects.each} %>
+</div>
+<% end %>
+
+<h1 id='home-title'> Recently added projects </h1>
+  <div class="projects-index">
+    <%= render :partial =>'projects/project',
+      :object =>{:projects => Project.order(:created_at).last(12).reverse.each} %>
+  </div>
